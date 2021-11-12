@@ -1,6 +1,5 @@
 <div class="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
   <div class="leading-6 font-medium text-gray-900">
-    <p>stocks works!</p>
     <p>
       Day: {{ day }}
     </p>
@@ -42,8 +41,8 @@
               </th>
             </tr>
             </thead>
-            <tbody>
-            <tr class="bg-white" *ngFor="let stock of stocks; let index = index;" [ngClass]="{'bg-gray-50': 1 === index % 2}">
+            <tbody *ngIf="todayStocks">
+            <tr class="bg-white" *ngFor="let stock of todayStocks.stocks; let index = index;" [ngClass]="{'bg-gray-50': 1 === index % 2}">
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {{ stock.name }}
               </td>
@@ -51,13 +50,13 @@
                 {{ stock.symbol }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
-                $ {{ stock.price }}
+                $ {{ stock.price | format }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
-                $ {{ stock.price }}
+                $ {{ stock.currentPrice | format }}
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
-
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500" [ngClass]="{'text-green-500': stock.change >= 0, 'text-red-500': stock.change < 0}">
+                {{ stock.change | format }} / {{ stock.ratio | format }} %
               </td>
             </tr>
             </tbody>

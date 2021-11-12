@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import { startWith } from "rxjs/operators"
 
 import { Stock } from "../stock";
+import {Day} from "../day";
 import { StockService } from "../stock.service";
 
 @Component({
@@ -14,6 +13,7 @@ export class StocksComponent implements OnInit {
   stocks: Stock[] = [];
   day: number = 1;
   currentDay: Date = new Date();
+  dayData: Day[] = [];
 
   constructor(private stockService: StockService) { }
 
@@ -23,16 +23,25 @@ export class StocksComponent implements OnInit {
 
   getStocks(): void {
     this.stockService.getStocks()
-      .subscribe(stocks => this.stocks = stocks)
+      .subscribe(stocks => {
+        this.stocks = stocks;
+        this.dayData.push(new Day(this.day, this.stocks))
+      })
   }
 
   passDay(): void {
+    const base = this.todayStocks
     this.day += 1;
+    this.dayData.push(new Day(this.day, base.stocks));
   }
 
-  get today(){
+  get today(): Date{
     let date = new Date(this.currentDay.valueOf());
     date.setDate(date.getDate() + (this.day-1));
     return date;
+  }
+
+  get todayStocks(): Day {
+    return this.dayData[this.day-1]
   }
 }
