@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "proxy": "node proxy/index.js"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +35,9 @@
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.4.3"
+    "typescript": "~4.4.3",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
+    "body-parser": "^1.19.0"
   }
 }
