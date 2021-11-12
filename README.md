@@ -1,3 +1,13 @@
+# Proxy
+
+Since the API endpoint does not support CORS requests, I wrote a simple local proxy to use the endpoint in development.
+
+To start the proxy:
+
+`npm run proxy`
+
+NB! This does not work in a production environment. The API endpoint would have to support CORS requests or the app needs to run on the same domain as the API.
+
 # StocksNg
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2.
